@@ -14,7 +14,6 @@ from koans.about_dictionaries import AboutDictionaries
 from koans.about_string_manipulation import AboutStringManipulation
 from koans.about_tuples import AboutTuples
 from koans.about_methods import AboutMethods
-from koans.about_control_statements import AboutControlStatements
 from koans.about_true_and_false import AboutTrueAndFalse
 from koans.about_sets import AboutSets
 from koans.about_triangle_project import AboutTriangleProject
@@ -58,7 +57,6 @@ def koans():
     suite.addTests(loader.loadTestsFromTestCase(AboutStringManipulation))
     suite.addTests(loader.loadTestsFromTestCase(AboutTuples))
     suite.addTests(loader.loadTestsFromTestCase(AboutMethods))
-    suite.addTests(loader.loadTestsFromTestCase(AboutControlStatements))
     suite.addTests(loader.loadTestsFromTestCase(AboutTrueAndFalse))
     suite.addTests(loader.loadTestsFromTestCase(AboutSets))
     suite.addTests(loader.loadTestsFromTestCase(AboutTriangleProject))
