@@ -17,10 +17,14 @@
 # and
 #   about_triangle_project_2.py
 #
-def triangle(a, b, c):
-    # DELETE 'PASS' AND WRITE THIS CODE
-    pass
-
+def triangle(a,b,c):
+    sides = len(set([a,b,c]))
+    if sides == 1:
+        return 'equilateral'
+    elif sides == 2:
+        return 'isosceles'
+    else:
+        return 'scalene'
 
 # Error class used in part 2.  No need to change this code.
 class TriangleError(StandardError):
