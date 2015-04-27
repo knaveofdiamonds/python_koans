@@ -34,8 +34,13 @@ from runner.koan import *
 # Your goal is to write the score method.
 
 def score(dice):
-    # You need to write this method
-    pass
+    counts  = [dice.count(i) for i in range(1,7)]
+    triples = [int(c >= 3) for c in counts]
+
+    base    = [a * b for a, b in zip(counts, [100, 0, 0, 0, 50, 0])]
+    bonuses = [a * b for a, b in zip(triples, [700, 200, 300, 400, 350, 600])]
+
+    return sum(base + bonuses)
 
 
 class AboutScoringProject(Koan):
