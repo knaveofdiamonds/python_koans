@@ -22,11 +22,32 @@ from runner.koan import *
 class Proxy(object):
     def __init__(self, target_object):
         # WRITE CODE HERE
+        self._messages = []
 
         #initialize '_obj' attribute last. Trust me on this!
         self._obj = target_object
 
     # WRITE CODE HERE
+
+    def messages(self):
+        return self._messages
+
+    def was_called(self, attr):
+        return attr in self.messages()
+
+    def number_of_times_called(self, attr):
+        return self.messages().count(attr)
+
+    def __getattr__(self, attr):
+        self.messages().append(attr)
+        return object.__getattribute__(self, '_obj').__getattribute__(attr)
+
+    def __setattr__(self, attr, value):
+        if attr == "_messages" or attr == "_obj":
+            object.__setattr__(self, attr, value)
+        else:
+            self.messages().append(attr)
+            self._obj.__setattr__(attr, value)
 
 
 # The proxy object should pass the following Koan:
@@ -39,12 +60,13 @@ class AboutProxyObjectProject(Koan):
         self.assertTrue(isinstance(tv, Proxy))
 
     def test_tv_methods_still_perform_their_function(self):
-        tv = Proxy(Television())
+        raw_tv = Television()
+        tv = Proxy(raw_tv)
 
         tv.channel = 10
         tv.power()
 
-        self.assertEqual(10, tv.channel)
+        self.assertEqual(10, raw_tv.channel)
         self.assertTrue(tv.is_on())
 
     def test_proxy_records_messages_sent_to_tv(self):
